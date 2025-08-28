@@ -85,36 +85,6 @@ devoir_react/
     └── vite.config.js
 ```
 
-## Fonctionnalités techniques
-
-### Sécurité
-- Authentification JWT
-- Routes protégées par rôle
-- Validation côté frontend et backend
-- Gestion des erreurs
-
-### Interface utilisateur
-- Design moderne avec gradients
-- Animations CSS fluides
-- Interface française complète
-- Feedback visuel pour toutes les actions
-
-### Gestion des images
-- Support URL et upload de fichiers
-- Conversion automatique en Base64
-- Aperçu en temps réel
-- Gestion d'erreurs de chargement
-
-## Comptes de test
-
-Pour tester l'application, vous pouvez :
-1. Créer un nouveau compte via l'inscription
-2. Ou utiliser l'interface MongoDB Express pour créer/modifier des utilisateurs directement
-
-## Dépannage
-
-### Problèmes courants
-
 **L'API ne répond pas** :
 - Vérifier que Docker est en cours d'exécution
 - S'assurer que les ports 4555 et 9555 sont libres
