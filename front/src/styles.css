@@ -313,6 +313,26 @@ textarea {
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
+.signup-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.signup-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -496,6 +516,13 @@ nav .navwrap {
   justify-content: flex-end;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* Buttons */
 .btn-promote {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -517,6 +544,32 @@ nav .navwrap {
 }
 
 .btn-promote:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.btn-delete:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+}
+
+.btn-delete:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
@@ -832,6 +885,169 @@ nav .navwrap {
   font-size: 0.9rem;
 }
 
+/* Signup Styles */
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  padding: 20px;
+}
+
+.signup-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 480px;
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.signup-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.signup-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.signup-header p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.signup-form {
+  margin-bottom: 24px;
+}
+
+.signup-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.signup-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+}
+
+.signup-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.signup-footer {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.signup-footer p {
+  margin-bottom: 16px;
+}
+
+.auth-link {
+  color: #4facfe;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+  color: #00f2fe;
+  text-decoration: underline;
+}
+
+.security-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  color: #0369a1;
+  font-size: 0.85rem;
+}
+
+.validation-hint {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.validation-hint.error {
+  color: #dc2626;
+}
+
+.validation-hint.success {
+  color: #059669;
+}
+
+.success-animation {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  animation: bounceIn 0.6s ease-out;
+}
+
+.success-animation h1 {
+  margin: 0 0 16px 0;
+  color: #059669;
+  font-size: 2rem;
+}
+
+.success-animation p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Settings/Change Password Styles */
 .settings-card {
   background: #fff;
@@ -1036,6 +1252,12 @@ nav .navwrap {
   .nav-actions {
     gap: 8px;
     flex-wrap: wrap;
+  }
+
+  .login-nav-btn,
+  .signup-nav-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
   
   .nav-action-link {

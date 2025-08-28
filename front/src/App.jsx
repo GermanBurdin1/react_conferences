@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
 import ConferenceDetail from './pages/ConferenceDetail.jsx'
 import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
 import ConferencesAdmin from './pages/ConferencesAdmin.jsx'
 import UsersAdmin from './pages/UserAdmin.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/conf/:id" element={<ConferenceDetail />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 					<Route element={<PrivateRoute />}>
             <Route path="/password" element={<ChangePassword />} />  
           </Route>

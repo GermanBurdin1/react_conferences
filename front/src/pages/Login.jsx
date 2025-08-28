@@ -1,15 +1,22 @@
-import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../state/AuthContext.jsx'
 
 export default function Login() {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const nav = useNavigate()
   const loc = useLocation()
   const { login: doLogin } = useAuth()
+
+  useEffect(() => {
+    if (loc.state?.message) {
+      setSuccessMessage(loc.state.message)
+    }
+  }, [loc.state])
 
   const submit = async (e) => {
     e.preventDefault()
@@ -41,6 +48,13 @@ export default function Login() {
             <div className="alert alert-error">
               <span className="alert-icon">⚠️</span>
               <span>{err}</span>
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="alert alert-success">
+              <span className="alert-icon">✅</span>
+              <span>{successMessage}</span>
             </div>
           )}
 
@@ -90,7 +104,16 @@ export default function Login() {
         </form>
 
         <div className="login-footer">
-          <p>🔒 Your data is secure and encrypted</p>
+          <p>
+            Don't have an account?{' '}
+            <Link to="/signup" className="auth-link">
+              Create one here
+            </Link>
+          </p>
+          <div className="security-notice">
+            <span>🔒</span>
+            Your data is secure and encrypted
+          </div>
         </div>
       </div>
     </div>

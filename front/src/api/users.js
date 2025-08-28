@@ -3,7 +3,6 @@ import { api } from './client.js'
 // Get all: GET /users
 export const listUsers = () => api('/users')
 
-// Promote: PATCH /usertype?id=...   body: { newType: 'admin' }
 export const promoteAdmin = (id) =>
   api(`/usertype?id=${encodeURIComponent(id)}`, {
     method: 'PATCH',

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { listUsers, promoteAdmin } from '../api/users.js'
+import { listUsers, promoteAdmin, deleteUser } from '../api/users.js'
 
 export default function UsersAdmin() {
   const [items, setItems] = useState([])
   const [err, setErr] = useState('')
   const [promoting, setPromoting] = useState(null)
+  const [deleting, setDeleting] = useState(null)
   const [loading, setLoading] = useState(true)
   const [successMessage, setSuccessMessage] = useState('')
 
@@ -37,6 +38,26 @@ export default function UsersAdmin() {
       setErr(`Failed to promote user ${uid}: ${e.message || 'Unknown error'}`)
     } finally {
       setPromoting(null)
+    }
+  }
+
+  const handleDeleteUser = async (uid) => {
+    if (!window.confirm(`Are you sure you want to delete user "${uid}"? This action cannot be undone.`)) {
+      return
+    }
+
+    try {
+      setDeleting(uid)
+      setErr('')
+      setSuccessMessage('')
+      await deleteUser(uid)
+      setSuccessMessage(`User ${uid} has been deleted successfully!`)
+      load()
+    } catch (e) {
+      console.error('Delete user error:', e)
+      setErr(`Failed to delete user ${uid}: ${e.message || 'Unknown error'}`)
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -122,30 +143,52 @@ export default function UsersAdmin() {
               </div>
               
               <div className="user-actions">
-                {typ !== 'admin' ? (
+                <div className="action-buttons">
+                  {typ !== 'admin' && (
+                    <button 
+                      className={`btn btn-promote ${promoting === uid ? 'loading' : ''}`}
+                      onClick={() => promote(uid)}
+                      disabled={promoting === uid || deleting === uid}
+                    >
+                      {promoting === uid ? (
+                        <>
+                          <div className="btn-spinner"></div>
+                          Promoting...
+                        </>
+                      ) : (
+                        <>
+                          <span>👑</span>
+                          Promote
+                        </>
+                      )}
+                    </button>
+                  )}
+                  
+                  {typ === 'admin' && (
+                    <div className="admin-badge">
+                      <span>👑</span>
+                      Administrator
+                    </div>
+                  )}
+                  
                   <button 
-                    className={`btn btn-promote ${promoting === uid ? 'loading' : ''}`}
-                    onClick={() => promote(uid)}
-                    disabled={promoting === uid}
+                    className={`btn btn-delete ${deleting === uid ? 'loading' : ''}`}
+                    onClick={() => handleDeleteUser(uid)}
+                    disabled={deleting === uid || promoting === uid}
                   >
-                    {promoting === uid ? (
+                    {deleting === uid ? (
                       <>
                         <div className="btn-spinner"></div>
-                        Promoting...
+                        Deleting...
                       </>
                     ) : (
                       <>
-                        <span>👑</span>
-                        Promote to Admin
+                        <span>🗑️</span>
+                        Delete
                       </>
                     )}
                   </button>
-                ) : (
-                  <div className="admin-badge">
-                    <span>👑</span>
-                    Administrator
-                  </div>
-                )}
+                </div>
               </div>
             </div>
           )

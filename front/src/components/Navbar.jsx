@@ -64,10 +64,16 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            <Link to="/login" className="login-nav-btn">
-              <span>🔓</span>
-              Login
-            </Link>
+            <>
+              <Link to="/signup" className="signup-nav-btn">
+                <span>✨</span>
+                Sign Up
+              </Link>
+              <Link to="/login" className="login-nav-btn">
+                <span>🔓</span>
+                Login
+              </Link>
+            </>
           )}
         </div>
       </div>
