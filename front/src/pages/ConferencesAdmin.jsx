@@ -15,13 +15,35 @@ export default function ConferencesAdmin() {
   const load = ()=> listConfs().then(setItems).catch(e=>setErr(e.message))
   useEffect(()=>{ load() },[])
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0]
+    console.log('Fichier sélectionné:', file)
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        setErr('La taille du fichier ne doit pas dépasser 5MB')
+        return
+      }
+      
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        console.log('Image convertie en base64, longueur:', event.target.result.length)
+        setForm({...form, img: event.target.result})
+      }
+      reader.onerror = (error) => {
+        console.error('Erreur FileReader:', error)
+        setErr('Erreur lors de la lecture du fichier')
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault(); setErr('')
     try {
       // Validation simple côté frontend
       const f = form
-      if (!f.title || !f.description || !f.img || !f.content || !f.design?.mainColor || !f.design?.secondColor) {
-        setErr('Remplissez tous les champs obligatoires: titre, description, image, contenu, couleurs.')
+      if (!f.title || !f.description || !f.content || !f.design?.mainColor || !f.design?.secondColor) {
+        setErr('Remplissez tous les champs obligatoires: titre, description, contenu, couleurs.')
         return
       }
       if (editingId) await updateConf(editingId, f); else await createConf(f)
@@ -72,8 +94,54 @@ export default function ConferencesAdmin() {
           </div>
 
           <div className="field">
-            <label>URL de l'image *</label>
-            <input value={form.img} onChange={e=>setForm({...form,img:e.target.value})} required />
+            <label>Image de la conférence</label>
+            <div className="image-upload-section">
+              <div className="upload-methods">
+                <div className="upload-method">
+                  <label>URL de l'image</label>
+                  <input 
+                    type="url" 
+                    value={form.img} 
+                    onChange={e=>setForm({...form,img:e.target.value})} 
+                    placeholder="https://exemple.com/image.jpg"
+                  />
+                </div>
+                <div className="upload-divider">
+                  <span>ou</span>
+                </div>
+                <div className="upload-method">
+                  <label>Télécharger un fichier</label>
+                  <input 
+                    type="file" 
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="file-input"
+                  />
+                </div>
+              </div>
+              {form.img && (
+                <div className="image-preview">
+                  <img 
+                    src={form.img} 
+                    alt="Aperçu" 
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextElementSibling.style.display = 'block';
+                    }}
+                  />
+                  <div className="image-error" style={{display: 'none'}}>
+                    ❌ Image non trouvée
+                  </div>
+                  <button 
+                    type="button" 
+                    className="remove-image"
+                    onClick={() => setForm({...form, img: ''})}
+                  >
+                    🗑️ Supprimer
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="field">
@@ -140,6 +208,25 @@ export default function ConferencesAdmin() {
           <div className="conferences-grid">
             {items.map(c=>(
               <div key={c.id} className="conference-admin-card">
+                {c.img && (
+                  <div className="conference-card-image">
+                    <img 
+                      src={c.img} 
+                      alt={c.title} 
+                      onError={(e) => {
+                        console.log('Erreur image:', c.img);
+                        e.target.parentElement.style.display = 'none';
+                      }}
+                      onLoad={() => {
+                        console.log('Image chargée:', c.title);
+                      }}
+                    />
+                    <div 
+                      className="image-overlay" 
+                      style={{background: `linear-gradient(45deg, ${c?.design?.mainColor || '#667eea'}dd, ${c?.design?.secondColor || '#764ba2'}dd)`}}
+                    />
+                  </div>
+                )}
                 <div className="conference-card-header">
                   <div 
                     className="conference-accent-bar" 
@@ -166,12 +253,6 @@ export default function ConferencesAdmin() {
                   </p>
                   
                   <div className="conference-meta">
-                    {c.img && (
-                      <div className="meta-item">
-                        <span className="meta-icon">🖼️</span>
-                        <span className="meta-text">Image incluse</span>
-                      </div>
-                    )}
                     <div className="meta-item">
                       <span className="meta-icon">🎨</span>
                       <span className="meta-text">
@@ -186,6 +267,12 @@ export default function ConferencesAdmin() {
                         Thème personnalisé
                       </span>
                     </div>
+                    {!c.img && (
+                      <div className="meta-item meta-no-image">
+                        <span className="meta-icon">📷</span>
+                        <span className="meta-text">Aucune image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
