@@ -183,8 +183,8 @@ export default function UsersAdmin() {
                       </>
                     ) : (
                       <>
-                        <span>🗑️</span>
-                        Supprimer
+                        <span>🎬</span>
+                        Sortir de Scène
                       </>
                     )}
                   </button>

@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1>🎯 Conférences Cyber</h1>
+        <h1>🎆 Conférences Cyber</h1>
         <p className="page-subtitle">Découvrez les dernières conférences et événements de cybersécurité</p>
       </div>
 
@@ -106,7 +106,7 @@ export default function Home() {
 
       {items.length === 0 && (
         <div className="empty-state">
-          <div className="empty-icon">🎯</div>
+          <div className="empty-icon">🎆</div>
           <h3>Aucune conférence trouvée</h3>
           <p>Il n'y a actuellement aucune conférence disponible.</p>
         </div>

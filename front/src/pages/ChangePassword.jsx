@@ -54,7 +54,7 @@ export default function ChangePassword() {
     <div className="page-container">
       <div className="settings-card">
         <div className="settings-header">
-          <div className="settings-icon">🔑</div>
+          <div className="settings-icon">🛡️</div>
           <h1>Changer le Mot de Passe</h1>
           <p>Mettez à jour la sécurité de votre compte</p>
         </div>

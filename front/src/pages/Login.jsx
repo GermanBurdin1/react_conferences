@@ -40,7 +40,7 @@ export default function Login() {
         <div className="login-header">
           <div className="login-icon">🔐</div>
           <h1>Bon Retour</h1>
-          <p>Connectez-vous pour accéder à CyberConf</p>
+          <p>Connectez-vous pour accéder aux conférences CyberConf</p>
         </div>
 
         <form onSubmit={submit} className="login-form">
@@ -111,8 +111,8 @@ export default function Login() {
             </Link>
           </p>
           <div className="security-notice">
-            <span>🔒</span>
-            Vos données sont sécurisées et chiffrées
+            <span>🛡️</span>
+            Vos données sont protégées par nos experts en sécurité
           </div>
         </div>
       </div>

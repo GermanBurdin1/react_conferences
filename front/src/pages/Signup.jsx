@@ -89,7 +89,7 @@ export default function Signup() {
     <div className="signup-container">
       <div className="signup-card">
         <div className="signup-header">
-          <div className="signup-icon">🎯</div>
+          <div className="signup-icon">🎆</div>
           <h1>Rejoignez CyberConf</h1>
           <p>Créez votre compte pour accéder aux conférences de cybersécurité</p>
         </div>
@@ -206,8 +206,8 @@ export default function Signup() {
             </Link>
           </p>
           <div className="security-notice">
-            <span>🔒</span>
-            Vos informations sont sécurisées et chiffrées
+            <span>🛡️</span>
+            Vos informations sont protégées par nos experts
           </div>
         </div>
       </div>

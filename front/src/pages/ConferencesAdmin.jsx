@@ -30,11 +30,11 @@ export default function ConferencesAdmin() {
   }
 
   const edit = (c)=>{ setEditingId(c.id); setForm({ ...c }) }
-  const del = async (id)=>{ if (!confirm('Delete?')) return; await removeConf(id); load() }
+  const del = async (id)=>{ if (!confirm('Supprimer cette conférence?')) return; await removeConf(id); load() }
 
   return (
     <>
-      <h1>Admin: Conférences</h1>
+      <h1>📅 Admin: Conférences</h1>
       {err && <p style={{color:'crimson'}}>{err}</p>}
 
       <div className="row">
