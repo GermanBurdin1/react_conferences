@@ -7,27 +7,67 @@ export default function Navbar() {
   const onLogout = () => { logout(); nav('/login', { replace: true }); }
 
   return (
-    <nav>
-      <div className="navwrap">
-        <div className="row">
-          <Link to={user ? '/' : '/login'}><strong>CyberConf</strong></Link>
-          {user && <Link to="/">Conferences</Link>}
+    <nav className="modern-nav">
+      <div className="nav-container">
+        <div className="nav-brand">
+          <Link to={user ? '/' : '/login'} className="brand-link">
+            <span className="brand-icon">🔐</span>
+            <span className="brand-text">CyberConf</span>
+          </Link>
         </div>
-        <div className="row">
-          {user?.type === 'admin' && (
-            <>
-              <Link to="/admin/conferences">Admin Conferences</Link>
-              <Link to="/admin/users">Admin Users</Link>
-            </>
+
+        <div className="nav-links">
+          {user && (
+            <Link to="/" className="nav-link">
+              <span className="nav-icon">🎯</span>
+              Conferences
+            </Link>
           )}
+          
+          {user?.type === 'admin' && (
+            <div className="admin-dropdown">
+              <span className="admin-badge">
+                <span className="admin-icon">👑</span>
+                Admin
+              </span>
+              <div className="dropdown-content">
+                <Link to="/admin/conferences" className="dropdown-link">
+                  <span>📋</span>
+                  Manage Conferences
+                </Link>
+                <Link to="/admin/users" className="dropdown-link">
+                  <span>👥</span>
+                  Manage Users
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="nav-actions">
           {user ? (
             <>
-              <Link to="/password">Change password</Link>
-              <span className="tag">{user.type}</span>
-              <button className="btn" onClick={onLogout}>Logout</button>
+              <Link to="/password" className="nav-action-link">
+                <span>🔑</span>
+                Change Password
+              </Link>
+              
+              <div className="user-info">
+                <span className={`user-badge ${user.type}`}>
+                  {user.type === 'admin' ? '👑' : '👤'} {user.type}
+                </span>
+              </div>
+              
+              <button className="logout-btn" onClick={onLogout}>
+                <span>🚪</span>
+                Logout
+              </button>
             </>
           ) : (
-            <Link to="/login" className="btn">Login</Link>
+            <Link to="/login" className="login-nav-btn">
+              <span>🔓</span>
+              Login
+            </Link>
           )}
         </div>
       </div>
