@@ -16,7 +16,6 @@ export function AuthProvider({ children }) {
   const login = async (loginId, password) => {
     const { token, id } = await authApi.login(loginId, password)
 
-    // Временно положим токен в localStorage, чтобы /isadmin увидел Authorization
     localStorage.setItem('auth', JSON.stringify({ token }))
 
     const isAdm = await authApi.isAdmin()

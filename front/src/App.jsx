@@ -6,6 +6,8 @@ import Login from './pages/Login.jsx'
 import ConferencesAdmin from './pages/ConferencesAdmin.jsx'
 import UsersAdmin from './pages/UserAdmin.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
+import PrivateRoute from './components/PrivateRoute.jsx'     
+import ChangePassword from './pages/ChangePassword.jsx'    
 
 export default function App() {
   return (
@@ -16,6 +18,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/conf/:id" element={<ConferenceDetail />} />
           <Route path="/login" element={<Login />} />
+					<Route element={<PrivateRoute />}>
+            <Route path="/password" element={<ChangePassword />} />  
+          </Route>
           <Route element={<AdminRoute />}>
             <Route path="/admin/conferences" element={<ConferencesAdmin />} />
             <Route path="/admin/users" element={<UsersAdmin />} />

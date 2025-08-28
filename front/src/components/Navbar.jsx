@@ -21,6 +21,7 @@ export default function Navbar() {
           )}
           {user ? (
             <>
+							<Link to="/password">Change password</Link>
               <span className="tag">{user.type}</span>
               <button className="btn" onClick={onLogout}>Logout</button>
             </>
