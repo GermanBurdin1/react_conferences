@@ -122,10 +122,10 @@ textarea {
 }
 
 .admin-welcome {
-  font-size: 0.7rem;
-  margin-left: 8px;
-  color: rgba(255, 215, 0, 0.9);
-  font-weight: 500;
+  font-size: 0.85rem;
+  margin-left: 12px;
+  color: rgba(255, 215, 0, 0.95);
+  font-weight: 600;
   letter-spacing: 0.3px;
 }
 
@@ -264,6 +264,68 @@ textarea {
 .settings-dropdown:hover .dropdown-content {
   display: block;
   animation: fadeInDown 0.3s ease;
+}
+
+/* User Menu Dropdown */
+.user-menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-menu-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-menu-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.user-menu-icon {
+  font-size: 1rem;
+}
+
+.user-menu-content {
+  right: 0;
+  left: auto;
+  min-width: 200px;
+}
+
+.user-menu-dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeInDown 0.3s ease;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
+
+.logout-link {
+  color: #dc2626 !important;
+  background: none !important;
+  border: none !important;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.logout-link:hover {
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
 }
 
 .nav-actions {

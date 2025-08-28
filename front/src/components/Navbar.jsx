@@ -50,25 +50,23 @@ export default function Navbar() {
         <div className="nav-actions">
           {user ? (
             <>
-              <div className="settings-dropdown">
-                <span className="settings-badge">
-                  <span className="settings-icon">⚙️</span>
-                  Paramètres
+              <div className="user-menu-dropdown">
+                <span className="user-menu-badge">
+                  <span className="user-menu-icon">👤</span>
+                  Mon Compte
                 </span>
-                <div className="dropdown-content settings-dropdown-content">
+                <div className="dropdown-content user-menu-content">
                   <Link to="/password" className="dropdown-link">
-                    <span>🛡️</span>
+                    <span>🔑</span>
                     Changer le Mot de Passe
                   </Link>
+                  <div className="dropdown-divider"></div>
+                  <button onClick={onLogout} className="dropdown-link logout-link">
+                    <span>🚪</span>
+                    Déconnexion
+                  </button>
                 </div>
               </div>
-              
-
-              
-              <button className="logout-btn" onClick={onLogout}>
-                <span>🚪</span>
-                Déconnexion
-              </button>
             </>
           ) : (
             <>
