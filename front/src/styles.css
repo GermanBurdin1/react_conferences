@@ -170,10 +170,10 @@ textarea {
   transition: all 0.2s ease;
 }
 
-.admin-badge:hover {
+/* .admin-badge:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
-}
+} */
 
 .admin-icon {
   font-size: 1rem;
@@ -1246,7 +1246,11 @@ nav .navwrap {
   }
   
   .nav-links {
-    display: none;
+    display: flex;
+    order: 2;
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
   }
   
   .nav-actions {

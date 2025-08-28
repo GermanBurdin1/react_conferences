@@ -13,12 +13,12 @@ export default function Signup() {
 
   const getPasswordStrength = (pwd) => {
     if (!pwd) return { level: 0, text: '', color: '#ddd' }
-    if (pwd.length < 6) return { level: 1, text: 'Weak', color: '#ff4757' }
-    if (pwd.length < 8) return { level: 2, text: 'Fair', color: '#ffa502' }
+    if (pwd.length < 6) return { level: 1, text: 'Faible', color: '#ff4757' }
+    if (pwd.length < 8) return { level: 2, text: 'Correct', color: '#ffa502' }
     if (pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) {
-      return { level: 4, text: 'Strong', color: '#2ed573' }
+      return { level: 4, text: 'Fort', color: '#2ed573' }
     }
-    return { level: 3, text: 'Good', color: '#70a1ff' }
+    return { level: 3, text: 'Bon', color: '#70a1ff' }
   }
 
   const strength = getPasswordStrength(password)
@@ -30,25 +30,25 @@ export default function Signup() {
     
     // Validation
     if (!username || !password || !confirmPassword) {
-      setErr('Please fill in all fields.')
+      setErr('Veuillez remplir tous les champs.')
       setLoading(false)
       return
     }
     
     if (username.length < 3) {
-      setErr('Username must be at least 3 characters long.')
+      setErr('Le nom d\'utilisateur doit comporter au moins 3 caractères.')
       setLoading(false)
       return
     }
     
     if (password.length < 6) {
-      setErr('Password must be at least 6 characters long.')
+      setErr('Le mot de passe doit comporter au moins 6 caractères.')
       setLoading(false)
       return
     }
     
     if (password !== confirmPassword) {
-      setErr('Passwords do not match.')
+      setErr('Les mots de passe ne correspondent pas.')
       setLoading(false)
       return
     }
@@ -59,12 +59,12 @@ export default function Signup() {
       setTimeout(() => {
         nav('/login', { 
           state: { 
-            message: 'Registration successful! Please login with your credentials.' 
+            message: 'Inscription réussie! Veuillez vous connecter avec vos identifiants.' 
           }
         })
       }, 2000)
     } catch (e) {
-      setErr(e.message || 'Registration failed')
+      setErr(e.message || 'Échec de l\'inscription')
     } finally {
       setLoading(false)
     }
@@ -76,9 +76,9 @@ export default function Signup() {
         <div className="signup-card">
           <div className="success-animation">
             <div className="success-icon">✅</div>
-            <h1>Registration Successful!</h1>
-            <p>Your account has been created successfully.</p>
-            <p>Redirecting to login page...</p>
+            <h1>Inscription Réussie!</h1>
+            <p>Votre compte a été créé avec succès.</p>
+            <p>Redirection vers la page de connexion...</p>
           </div>
         </div>
       </div>
@@ -90,8 +90,8 @@ export default function Signup() {
       <div className="signup-card">
         <div className="signup-header">
           <div className="signup-icon">🎯</div>
-          <h1>Join CyberConf</h1>
-          <p>Create your account to access cybersecurity conferences</p>
+          <h1>Rejoignez CyberConf</h1>
+          <p>Créez votre compte pour accéder aux conférences de cybersécurité</p>
         </div>
 
         <form onSubmit={submit} className="signup-form">
@@ -103,37 +103,37 @@ export default function Signup() {
           )}
 
           <div className="form-group">
-            <label className="form-label">Username</label>
+            <label className="form-label">Nom d'utilisateur</label>
             <input 
               type="text"
               className="form-input"
               value={username} 
               onChange={e => setUsername(e.target.value)} 
-              placeholder="Choose a unique username"
+              placeholder="Choisissez un nom d'utilisateur unique"
               required 
               disabled={loading}
               minLength={3}
             />
             {username && username.length < 3 && (
               <div className="validation-hint error">
-                Username must be at least 3 characters
+                Le nom d'utilisateur doit comporter au moins 3 caractères
               </div>
             )}
             {username && username.length >= 3 && (
               <div className="validation-hint success">
-                ✓ Username looks good
+                ✓ Le nom d'utilisateur semble bon
               </div>
             )}
           </div>
 
           <div className="form-group">
-            <label className="form-label">Password</label>
+            <label className="form-label">Mot de passe</label>
             <input 
               type="password" 
               className="form-input"
               value={password} 
               onChange={e => setPassword(e.target.value)} 
-              placeholder="Create a strong password"
+              placeholder="Créez un mot de passe fort"
               required 
               disabled={loading}
               minLength={6}
@@ -157,24 +157,24 @@ export default function Signup() {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Confirm Password</label>
+            <label className="form-label">Confirmez le mot de passe</label>
             <input 
               type="password" 
               className="form-input"
               value={confirmPassword} 
               onChange={e => setConfirmPassword(e.target.value)} 
-              placeholder="Confirm your password"
+              placeholder="Confirmez votre mot de passe"
               required 
               disabled={loading}
             />
             {confirmPassword && password !== confirmPassword && (
               <div className="validation-hint error">
-                ❌ Passwords do not match
+                ❌ Les mots de passe ne correspondent pas
               </div>
             )}
             {confirmPassword && password === confirmPassword && confirmPassword.length > 0 && (
               <div className="validation-hint success">
-                ✅ Passwords match
+                ✅ Les mots de passe correspondent
               </div>
             )}
           </div>
@@ -187,12 +187,12 @@ export default function Signup() {
             {loading ? (
               <>
                 <div className="btn-spinner"></div>
-                Creating Account...
+                Création du compte...
               </>
             ) : (
               <>
                 <span>🚀</span>
-                Create Account
+                Créer un compte
               </>
             )}
           </button>
@@ -200,14 +200,14 @@ export default function Signup() {
 
         <div className="signup-footer">
           <p>
-            Already have an account?{' '}
+            Vous avez déjà un compte?{' '}
             <Link to="/login" className="auth-link">
-              Sign in here
+              Connectez-vous ici
             </Link>
           </p>
           <div className="security-notice">
             <span>🔒</span>
-            Your information is secure and encrypted
+            Vos informations sont sécurisées et chiffrées
           </div>
         </div>
       </div>

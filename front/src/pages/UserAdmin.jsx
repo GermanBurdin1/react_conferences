@@ -17,7 +17,7 @@ export default function UsersAdmin() {
       setItems(arr.filter(Boolean))
       setErr('')
     } catch (e) {
-      setErr(String(e.message || 'Failed to load users'))
+      setErr(String(e.message || 'Échec du chargement des utilisateurs'))
     } finally {
       setLoading(false)
     }
@@ -31,18 +31,18 @@ export default function UsersAdmin() {
       setErr('')
       setSuccessMessage('')
       await promoteAdmin(uid)
-      setSuccessMessage(`User ${uid} has been promoted to admin successfully!`)
+      setSuccessMessage(`L'utilisateur ${uid} a été promu administrateur avec succès!`)
       load()
     } catch (e) {
       console.error('Promote admin error:', e)
-      setErr(`Failed to promote user ${uid}: ${e.message || 'Unknown error'}`)
+      setErr(`Échec de la promotion de l'utilisateur ${uid}: ${e.message || 'Erreur inconnue'}`)
     } finally {
       setPromoting(null)
     }
   }
 
   const handleDeleteUser = async (uid) => {
-    if (!window.confirm(`Are you sure you want to delete user "${uid}"? This action cannot be undone.`)) {
+    if (!window.confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur "${uid}"? Cette action ne peut pas être annulée.`)) {
       return
     }
 
@@ -51,11 +51,11 @@ export default function UsersAdmin() {
       setErr('')
       setSuccessMessage('')
       await deleteUser(uid)
-      setSuccessMessage(`User ${uid} has been deleted successfully!`)
+      setSuccessMessage(`L'utilisateur ${uid} a été supprimé avec succès!`)
       load()
     } catch (e) {
       console.error('Delete user error:', e)
-      setErr(`Failed to delete user ${uid}: ${e.message || 'Unknown error'}`)
+      setErr(`Échec de la suppression de l'utilisateur ${uid}: ${e.message || 'Erreur inconnue'}`)
     } finally {
       setDeleting(null)
     }
@@ -73,11 +73,11 @@ export default function UsersAdmin() {
     return (
       <div className="admin-container">
         <div className="admin-header">
-          <h1>👥 User Management</h1>
+          <h1>👥 Gestion des Utilisateurs</h1>
         </div>
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Loading users...</p>
+          <p>Chargement des utilisateurs...</p>
         </div>
       </div>
     )
@@ -86,8 +86,8 @@ export default function UsersAdmin() {
   return (
     <div className="admin-container">
       <div className="admin-header">
-        <h1>👥 User Management</h1>
-        <p className="admin-subtitle">Manage user roles and permissions</p>
+        <h1>👥 Gestion des Utilisateurs</h1>
+        <p className="admin-subtitle">Gérer les rôles et permissions des utilisateurs</p>
       </div>
 
       {err && (
@@ -107,15 +107,15 @@ export default function UsersAdmin() {
       <div className="users-stats">
         <div className="stat-card">
           <div className="stat-value">{items.length}</div>
-          <div className="stat-label">Total Users</div>
+          <div className="stat-label">Utilisateurs Total</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{items.filter(u => u.type === 'admin').length}</div>
-          <div className="stat-label">Administrators</div>
+          <div className="stat-label">Administrateurs</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{items.filter(u => u.type === 'user').length}</div>
-          <div className="stat-label">Regular Users</div>
+          <div className="stat-label">Utilisateurs Réguliers</div>
         </div>
       </div>
 
@@ -137,7 +137,7 @@ export default function UsersAdmin() {
                     className="user-role" 
                     style={{ color: getStatusColor(typ) }}
                   >
-                    {typ === 'admin' ? 'Administrator' : 'User'}
+                    {typ === 'admin' ? 'Administrateur' : 'Utilisateur'}
                   </div>
                 </div>
               </div>
@@ -153,12 +153,12 @@ export default function UsersAdmin() {
                       {promoting === uid ? (
                         <>
                           <div className="btn-spinner"></div>
-                          Promoting...
+                          Promotion...
                         </>
                       ) : (
                         <>
                           <span>👑</span>
-                          Promote
+                          Promouvoir
                         </>
                       )}
                     </button>
@@ -167,7 +167,7 @@ export default function UsersAdmin() {
                   {typ === 'admin' && (
                     <div className="admin-badge">
                       <span>👑</span>
-                      Administrator
+                      Administrateur
                     </div>
                   )}
                   
@@ -179,12 +179,12 @@ export default function UsersAdmin() {
                     {deleting === uid ? (
                       <>
                         <div className="btn-spinner"></div>
-                        Deleting...
+                        Suppression...
                       </>
                     ) : (
                       <>
                         <span>🗑️</span>
-                        Delete
+                        Supprimer
                       </>
                     )}
                   </button>
@@ -198,8 +198,8 @@ export default function UsersAdmin() {
       {items.length === 0 && (
         <div className="empty-state">
           <div className="empty-icon">👥</div>
-          <h3>No users found</h3>
-          <p>There are currently no users in the system.</p>
+          <h3>Aucun utilisateur trouvé</h3>
+          <p>Il n'y a actuellement aucun utilisateur dans le système.</p>
         </div>
       )}
     </div>

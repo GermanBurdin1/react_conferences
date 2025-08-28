@@ -28,7 +28,7 @@ export default function Login() {
       const to = loc.state?.from?.pathname || '/'
       nav(to, { replace: true })
     } catch (e) {
-      setErr(e.message || 'Login failed')
+      setErr(e.message || 'Échec de la connexion')
     } finally {
       setLoading(false)
     }
@@ -39,8 +39,8 @@ export default function Login() {
       <div className="login-card">
         <div className="login-header">
           <div className="login-icon">🔐</div>
-          <h1>Welcome Back</h1>
-          <p>Sign in to access CyberConf</p>
+          <h1>Bon Retour</h1>
+          <p>Connectez-vous pour accéder à CyberConf</p>
         </div>
 
         <form onSubmit={submit} className="login-form">
@@ -59,26 +59,26 @@ export default function Login() {
           )}
 
           <div className="form-group">
-            <label className="form-label">Username</label>
+            <label className="form-label">Nom d'utilisateur</label>
             <input 
               type="text"
               className="form-input"
               value={login} 
               onChange={e => setLogin(e.target.value)} 
-              placeholder="Enter your username"
+              placeholder="Entrez votre nom d'utilisateur"
               required 
               disabled={loading}
             />
           </div>
 
           <div className="form-group">
-            <label className="form-label">Password</label>
+            <label className="form-label">Mot de passe</label>
             <input 
               type="password" 
               className="form-input"
               value={password} 
               onChange={e => setPassword(e.target.value)} 
-              placeholder="Enter your password"
+              placeholder="Entrez votre mot de passe"
               required 
               disabled={loading}
             />
@@ -92,12 +92,12 @@ export default function Login() {
             {loading ? (
               <>
                 <div className="btn-spinner"></div>
-                Signing in...
+                Connexion...
               </>
             ) : (
               <>
                 <span>🚀</span>
-                Sign In
+                Se Connecter
               </>
             )}
           </button>
@@ -105,14 +105,14 @@ export default function Login() {
 
         <div className="login-footer">
           <p>
-            Don't have an account?{' '}
+            Vous n'avez pas de compte?{' '}
             <Link to="/signup" className="auth-link">
-              Create one here
+              Créez-en un ici
             </Link>
           </p>
           <div className="security-notice">
             <span>🔒</span>
-            Your data is secure and encrypted
+            Vos données sont sécurisées et chiffrées
           </div>
         </div>
       </div>

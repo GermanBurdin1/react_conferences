@@ -15,7 +15,7 @@ export default function Home() {
         setItems(Array.isArray(conferences) ? conferences : [])
         setErr('')
       } catch (e) {
-        setErr(e.message || 'Failed to load conferences')
+        setErr(e.message || 'Échec du chargement des conférences')
       } finally {
         setLoading(false)
       }
@@ -28,7 +28,7 @@ export default function Home() {
       <div className="page-container">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>Loading conferences...</p>
+          <p>Chargement des conférences...</p>
         </div>
       </div>
     )
@@ -39,7 +39,7 @@ export default function Home() {
       <div className="page-container">
         <div className="alert alert-error">
           <span className="alert-icon">⚠️</span>
-          <span>Error: {err}</span>
+          <span>Erreur: {err}</span>
         </div>
       </div>
     )
@@ -48,22 +48,22 @@ export default function Home() {
   return (
     <div className="page-container">
       <div className="page-header">
-        <h1>🎯 Cyber Conferences</h1>
-        <p className="page-subtitle">Discover the latest cybersecurity conferences and events</p>
+        <h1>🎯 Conférences Cyber</h1>
+        <p className="page-subtitle">Découvrez les dernières conférences et événements de cybersécurité</p>
       </div>
 
       <div className="conferences-stats">
         <div className="stat-card">
           <div className="stat-value">{items.length}</div>
-          <div className="stat-label">Total Events</div>
+          <div className="stat-label">Événements Total</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{items.filter(c => new Date(c.date) > new Date()).length}</div>
-          <div className="stat-label">Upcoming</div>
+          <div className="stat-label">À Venir</div>
         </div>
         <div className="stat-card">
           <div className="stat-value">{items.filter(c => c.title?.toLowerCase().includes('security')).length}</div>
-          <div className="stat-label">Security Events</div>
+          <div className="stat-label">Événements Sécurité</div>
         </div>
       </div>
 
@@ -91,13 +91,13 @@ export default function Home() {
             <div className="conference-footer">
               <div className="conference-status">
                 {new Date(c.date) > new Date() ? (
-                  <span className="status-badge upcoming">Upcoming</span>
+                  <span className="status-badge upcoming">À Venir</span>
                 ) : (
-                  <span className="status-badge past">Past Event</span>
+                  <span className="status-badge past">Événement Passé</span>
                 )}
               </div>
               <div className="view-details">
-                View Details →
+                Voir les Détails →
               </div>
             </div>
           </Link>
@@ -107,8 +107,8 @@ export default function Home() {
       {items.length === 0 && (
         <div className="empty-state">
           <div className="empty-icon">🎯</div>
-          <h3>No conferences found</h3>
-          <p>There are currently no conferences available.</p>
+          <h3>Aucune conférence trouvée</h3>
+          <p>Il n'y a actuellement aucune conférence disponible.</p>
         </div>
       )}
     </div>

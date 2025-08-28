@@ -20,7 +20,7 @@ export default function Navbar() {
           {user && (
             <Link to="/" className="nav-link">
               <span className="nav-icon">🎯</span>
-              Conferences
+              Conférences
             </Link>
           )}
           
@@ -33,11 +33,11 @@ export default function Navbar() {
               <div className="dropdown-content">
                 <Link to="/admin/conferences" className="dropdown-link">
                   <span>📋</span>
-                  Manage Conferences
+                  Gérer les Conférences
                 </Link>
                 <Link to="/admin/users" className="dropdown-link">
                   <span>👥</span>
-                  Manage Users
+                  Gérer les Utilisateurs
                 </Link>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function Navbar() {
             <>
               <Link to="/password" className="nav-action-link">
                 <span>🔑</span>
-                Change Password
+                Changer le Mot de Passe
               </Link>
               
               <div className="user-info">
@@ -60,18 +60,18 @@ export default function Navbar() {
               
               <button className="logout-btn" onClick={onLogout}>
                 <span>🚪</span>
-                Logout
+                Déconnexion
               </button>
             </>
           ) : (
             <>
               <Link to="/signup" className="signup-nav-btn">
                 <span>✨</span>
-                Sign Up
+                S'inscrire
               </Link>
               <Link to="/login" className="login-nav-btn">
                 <span>🔓</span>
-                Login
+                Connexion
               </Link>
             </>
           )}

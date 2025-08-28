@@ -11,12 +11,12 @@ export default function ChangePassword() {
 
   const getPasswordStrength = (pwd) => {
     if (!pwd) return { level: 0, text: '', color: '#ddd' }
-    if (pwd.length < 6) return { level: 1, text: 'Weak', color: '#ff4757' }
-    if (pwd.length < 8) return { level: 2, text: 'Fair', color: '#ffa502' }
+    if (pwd.length < 6) return { level: 1, text: 'Faible', color: '#ff4757' }
+    if (pwd.length < 8) return { level: 2, text: 'Correct', color: '#ffa502' }
     if (pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) {
-      return { level: 4, text: 'Strong', color: '#2ed573' }
+      return { level: 4, text: 'Fort', color: '#2ed573' }
     }
-    return { level: 3, text: 'Good', color: '#70a1ff' }
+    return { level: 3, text: 'Bon', color: '#70a1ff' }
   }
 
   const strength = getPasswordStrength(password)
@@ -27,24 +27,24 @@ export default function ChangePassword() {
     setOk('')
     
     if (!oldPassword || !password) {
-      return setErr('Please enter both old and new passwords.')
+      return setErr('Veuillez entrer à la fois l\'ancien et le nouveau mot de passe.')
     }
     if (password !== confirm) {
-      return setErr('New password and confirmation do not match.')
+      return setErr('Le nouveau mot de passe et la confirmation ne correspondent pas.')
     }
     if (password.length < 6) {
-      return setErr('New password must be at least 6 characters long.')
+      return setErr('Le nouveau mot de passe doit comporter au moins 6 caractères.')
     }
     
     try {
       setLoading(true)
       await changePassword(oldPassword, password) 
-      setOk('Password changed successfully!')
+      setOk('Mot de passe changé avec succès!')
       setOld('')
       setNew('')
       setConfirm('')
     } catch (e) {
-      setErr(String(e.message || 'Failed to change password'))
+      setErr(String(e.message || 'Échec du changement de mot de passe'))
     } finally {
       setLoading(false)
     }
@@ -55,8 +55,8 @@ export default function ChangePassword() {
       <div className="settings-card">
         <div className="settings-header">
           <div className="settings-icon">🔑</div>
-          <h1>Change Password</h1>
-          <p>Update your account security</p>
+          <h1>Changer le Mot de Passe</h1>
+          <p>Mettez à jour la sécurité de votre compte</p>
         </div>
 
         <form onSubmit={submit} className="settings-form">
@@ -75,26 +75,26 @@ export default function ChangePassword() {
           )}
 
           <div className="form-group">
-            <label className="form-label">Current Password</label>
+            <label className="form-label">Mot de Passe Actuel</label>
             <input 
               type="password" 
               className="form-input"
               value={oldPassword} 
               onChange={e => setOld(e.target.value)} 
-              placeholder="Enter your current password"
+              placeholder="Entrez votre mot de passe actuel"
               required 
               disabled={loading}
             />
           </div>
 
           <div className="form-group">
-            <label className="form-label">New Password</label>
+            <label className="form-label">Nouveau Mot de Passe</label>
             <input 
               type="password" 
               className="form-input"
               value={password} 
               onChange={e => setNew(e.target.value)} 
-              placeholder="Enter your new password"
+              placeholder="Entrez votre nouveau mot de passe"
               required 
               disabled={loading}
             />
@@ -117,24 +117,24 @@ export default function ChangePassword() {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Confirm New Password</label>
+            <label className="form-label">Confirmez le Nouveau Mot de Passe</label>
             <input 
               type="password" 
               className="form-input"
               value={confirm} 
               onChange={e => setConfirm(e.target.value)} 
-              placeholder="Confirm your new password"
+              placeholder="Confirmez votre nouveau mot de passe"
               required 
               disabled={loading}
             />
             {confirm && password !== confirm && (
               <div className="password-mismatch">
-                ❌ Passwords do not match
+                ❌ Les mots de passe ne correspondent pas
               </div>
             )}
             {confirm && password === confirm && confirm.length > 0 && (
               <div className="password-match">
-                ✅ Passwords match
+                ✅ Les mots de passe correspondent
               </div>
             )}
           </div>
@@ -147,12 +147,12 @@ export default function ChangePassword() {
             {loading ? (
               <>
                 <div className="btn-spinner"></div>
-                Updating Password...
+                Mise à jour du mot de passe...
               </>
             ) : (
               <>
                 <span>🔒</span>
-                Update Password
+                Mettre à Jour le Mot de Passe
               </>
             )}
           </button>
@@ -162,8 +162,8 @@ export default function ChangePassword() {
           <div className="security-tip">
             <span className="tip-icon">💡</span>
             <div>
-              <strong>Security Tip:</strong>
-              <p>After changing your password, you'll need to sign in again for security reasons.</p>
+              <strong>Conseil de Sécurité:</strong>
+              <p>Après avoir changé votre mot de passe, vous devrez vous reconnecter pour des raisons de sécurité.</p>
             </div>
           </div>
         </div>
