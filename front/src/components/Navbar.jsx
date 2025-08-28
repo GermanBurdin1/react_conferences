@@ -4,13 +4,14 @@ import { useAuth } from '../state/AuthContext.jsx'
 export default function Navbar() {
   const { user, logout } = useAuth()
   const nav = useNavigate()
-  const onLogout = () => { logout(); nav('/'); }
+  const onLogout = () => { logout(); nav('/login', { replace: true }); }
+
   return (
     <nav>
       <div className="navwrap">
         <div className="row">
-          <Link to="/"><strong>CyberConf</strong></Link>
-          <Link to="/">Conferences</Link>
+          <Link to={user ? '/' : '/login'}><strong>CyberConf</strong></Link>
+          {user && <Link to="/">Conferences</Link>}
         </div>
         <div className="row">
           {user?.type === 'admin' && (
@@ -21,7 +22,7 @@ export default function Navbar() {
           )}
           {user ? (
             <>
-							<Link to="/password">Change password</Link>
+              <Link to="/password">Change password</Link>
               <span className="tag">{user.type}</span>
               <button className="btn" onClick={onLogout}>Logout</button>
             </>
